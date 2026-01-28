@@ -42,7 +42,16 @@ require('lazy').setup {
   require 'plugins.indent-blankline',
   require 'plugins.misc',
   require 'plugins.lazygit',
+  require 'plugins.nvim-surround',
 }
 
 -- setup must be called before loading
 vim.cmd.colorscheme 'catppuccin'
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    vim.opt_local.expandtab = true -- 保持使用 Tab (符合 Go 规范)
+    vim.opt_local.tabstop = 4 -- 但让这个 Tab 看起来只有 2 个空格宽
+    vim.opt_local.shiftwidth = 4
+  end,
+})

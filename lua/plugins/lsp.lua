@@ -192,6 +192,19 @@ return {
       --     },
       --   },
       -- },
+      gopls = {
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+            usePlaceholders = true,
+            completeUnimported = true,
+          },
+        },
+      },
       ruff = {},
       jsonls = {},
       sqlls = {},
