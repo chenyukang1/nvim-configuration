@@ -30,9 +30,14 @@ return {
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
-      formatting.gofumpt, -- 更严格的 gofmt
-      formatting.goimports_reviser, -- 自动排序和优化导入语句
+      formatting.gofumpt.with {
+        filetypes = { 'go', 'gomod', 'gowork' },
+      }, -- 更严格的 gofmt
+      formatting.goimports_reviser.with {
+        filetypes = { 'go' },
+      }, -- 自动排序和优化导入语句
       formatting.golines.with { -- 处理超长行
+        filetypes = { 'go' },
         extra_args = { '--max-len=120', '--base-complexity=30' },
       },
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },

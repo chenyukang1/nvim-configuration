@@ -10,6 +10,14 @@ local opts = { noremap = true, silent = true }
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- 插入模式下的光标移动
+vim.keymap.set('i', '<C-f>', '<Right>', { desc = '光标向右移动' })
+vim.keymap.set('i', '<C-b>', '<Left>', { desc = '光标向左移动' })
+vim.keymap.set('i', '<C-p>', '<Up>', { desc = '光标向上移动' })
+vim.keymap.set('i', '<C-n>', '<Down>', { desc = '光标向下移动' })
+vim.keymap.set('i', '<C-a>', '<Home>', { desc = '移动到行首' })
+vim.keymap.set('i', '<C-e>', '<End>', { desc = '移动到行尾' })
+
 -- Allow moving the cursor through wrapped lines with j, k
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -41,8 +49,12 @@ vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
 vim.keymap.set('n', '<S-l>', ':bnext<CR>', opts)
 vim.keymap.set('n', '<S-h>', ':bprevious<CR>', opts)
 vim.keymap.set('n', '<C-i>', '<C-i>', opts) -- to restore jump forward
-vim.keymap.set('n', '<leader>x', ':Bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
+vim.keymap.set('n', '<leader>bn', '<cmd> enew <CR>', opts) -- new buffer
+vim.keymap.set('n', '<leader>bd', ':Bdelete!<CR>', opts) -- close buffer
+vim.keymap.set('n', '<leader>br', '<cmd>BufferLineCloseRight<CR>', { desc = '关闭右侧所有 Buffer' })
+vim.keymap.set('n', '<leader>bl', '<cmd>BufferLineCloseLeft<CR>', { desc = '关闭左侧所有 Buffer' })
+vim.keymap.set('n', '<leader>bo', '<cmd>BufferLineCloseOthers<CR>', { desc = '关闭其他所有 Buffer' })
+vim.keymap.set('n', '<leader>ba', '<cmd>bufdo bd<CR>', { desc = '关闭全部 Buffer' })
 
 -- Increment/decrement numbers
 vim.keymap.set('n', '<leader>+', '<C-a>', opts) -- increment
@@ -91,6 +103,8 @@ vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', opts)
 -- vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 vim.keymap.set('n', '<leader>Y', [["+Y]])
 
+-- Preview colorscheme
+vim.keymap.set('n', '<leader>tc', ':Telescope colorscheme enable_preview=true<CR>', { desc = '预览主题' })
 
 -- Toggle diagnostics
 local diagnostics_active = true
